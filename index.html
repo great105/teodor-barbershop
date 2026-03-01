@@ -99,22 +99,29 @@ body { font-family: "Work Sans", sans-serif; }
     background: linear-gradient(90deg, transparent, #d4af37, transparent);
 }
 
-/* Hero logo organic integration */
+/* Hero logo */
 @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-8px); }
 }
-.hero-logo {
+.logo-badge {
     animation: float 6s ease-in-out infinite;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
-    transition: filter 0.4s ease;
+    background: rgba(255, 252, 248, 0.95);
+    border-radius: 1.25rem;
+    border: 1.5px solid rgba(212, 175, 55, 0.35);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    padding: 1.25rem 1.75rem;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
 }
-.hero-logo:hover {
-    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.6));
-}
-.logo-watermark {
-    filter: sepia(1) hue-rotate(-10deg) brightness(0.35) saturate(2);
-    opacity: 0.1;
+.logo-badge:hover {
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(212, 175, 55, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 </style>
 </head>
@@ -189,9 +196,9 @@ body { font-family: "Work Sans", sans-serif; }
 <div class="absolute inset-0 bg-black/70 z-10"></div>
 <div class="absolute inset-0 bg-cover bg-center scale-105" style="background-color: #211111; background-image: url('https://theodore-barbershop.com/95eb313923869e3db38a.png');"></div>
 <div class="relative z-20 text-center px-4 max-w-4xl">
-    <!-- Logo (light SVG for dark backgrounds) -->
-    <div class="relative inline-block mb-6">
-        <img src="Teodor-light.svg" alt="Теодор" class="hero-logo relative h-44 md:h-64 mx-auto"/>
+    <!-- Logo badge -->
+    <div class="inline-block mb-6 logo-badge">
+        <img src="Teodor.svg" alt="Теодор" class="h-36 md:h-52 mx-auto"/>
     </div>
     <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-3 block gold-glow">Barber &middot; Haircut &middot; Shaves &middot; Theodore</span>
     <h2 class="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
