@@ -4,11 +4,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Барбершоп Теодор - Мужская территория</title>
+<meta name="description" content="Барбершоп Теодор — мужская парикмахерская в Москве. Стрижки, бритьё, моделирование бороды. Ежедневно 10:00–22:00, ул. Бакунинская 72С.2. Запись онлайн.">
 <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://theodore-barbershop.com">
+<link rel="preload" as="image" href="Teodor-hero.webp" type="image/webp">
 <link rel="preload" as="image" href="https://theodore-barbershop.com/95eb313923869e3db38a.png">
 <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -52,6 +54,7 @@ body { font-family: "Work Sans", sans-serif; }
     display: flex;
     animation: marquee 30s linear infinite;
     width: max-content;
+    will-change: transform;
 }
 .marquee-track:hover { animation-play-state: paused; }
 
@@ -71,6 +74,7 @@ body { font-family: "Work Sans", sans-serif; }
     );
     background-size: 60px 4px;
     animation: barber-pole 2s linear infinite;
+    will-change: background-position;
 }
 
 /* Gold glow */
@@ -202,7 +206,10 @@ body { font-family: "Work Sans", sans-serif; }
     <!-- Logo -->
     <div class="relative inline-block mb-6">
         <div class="logo-glow"></div>
-        <img src="Teodor-hero.png" alt="Теодор" class="hero-logo relative z-10 h-52 md:h-80 mx-auto"/>
+        <picture>
+            <source srcset="Teodor-hero.webp" type="image/webp">
+            <img src="Teodor-hero.png" alt="Теодор" class="hero-logo relative z-10 h-52 md:h-80 mx-auto" width="800" height="533" fetchpriority="high"/>
+        </picture>
     </div>
     <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-3 block gold-glow">Barber &middot; Haircut &middot; Shaves &middot; Theodore</span>
     <h2 class="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
@@ -242,7 +249,7 @@ body { font-family: "Work Sans", sans-serif; }
 
 <!-- Photo divider after services -->
 <div class="relative h-64 w-full overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('https://theodore-barbershop.com/dd4bfc563a0e07c85969.png');"></div>
+    <div class="absolute inset-0 bg-cover bg-center bg-scroll md:bg-fixed" style="background-image: url('https://theodore-barbershop.com/dd4bfc563a0e07c85969.png');"></div>
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 flex items-center justify-center h-full">
         <p class="font-accent text-3xl md:text-5xl text-white text-center gold-glow">Дружище, заходи к нам в гости!</p>
@@ -317,7 +324,7 @@ body { font-family: "Work Sans", sans-serif; }
 
 <!-- Photo divider after gallery -->
 <div class="relative h-48 w-full overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('https://theodore-barbershop.com/becbf4332510f9e6c305.png');"></div>
+    <div class="absolute inset-0 bg-cover bg-center bg-scroll md:bg-fixed" style="background-image: url('https://theodore-barbershop.com/becbf4332510f9e6c305.png');"></div>
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 flex items-center justify-center h-full">
         <p class="font-accent text-2xl md:text-4xl text-accent-gold text-center gold-glow">Barber &middot; Haircut &middot; Shaves</p>
@@ -387,7 +394,7 @@ body { font-family: "Work Sans", sans-serif; }
         </div>
     </div>
     <div class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p class="text-slate-500 text-xs uppercase tracking-widest">&copy; 2024 Барбершоп Теодор. Все права защищены.</p>
+        <p class="text-slate-500 text-xs uppercase tracking-widest">&copy; 2025 Барбершоп Теодор. Все права защищены.</p>
         <div class="flex gap-8 text-slate-500 text-xs uppercase tracking-widest">
             <a class="hover:text-white transition-colors" href="#">Политика конфиденциальности</a>
             <a class="hover:text-white transition-colors" href="#">Условия использования</a>
