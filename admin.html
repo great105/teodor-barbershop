@@ -51,22 +51,28 @@ body { font-family: "Work Sans", sans-serif; }
 <!-- Admin Panel (hidden until login) -->
 <div id="admin-panel" class="hidden flex-1 flex flex-col">
   <!-- Top Bar -->
-  <header class="bg-surface-dark border-b border-white/10 px-6 py-4 flex items-center justify-between">
+  <header class="bg-surface-dark border-b border-white/10 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <img src="Teodor.svg" alt="Теодор" class="h-6 brightness-0 invert"/>
-      <span class="text-lg font-bold uppercase tracking-wider">Админ</span>
+      <button id="sidebar-toggle" class="lg:hidden p-1 -ml-1 text-slate-400 hover:text-white transition-colors">
+        <span class="material-symbols-outlined text-2xl">menu</span>
+      </button>
+      <img src="Teodor.svg" alt="Теодор" class="h-5 sm:h-6 brightness-0 invert"/>
+      <span class="text-base sm:text-lg font-bold uppercase tracking-wider">Админ</span>
     </div>
-    <div class="flex items-center gap-4">
-      <a href="index.html" class="text-sm text-slate-400 hover:text-white transition-colors">На сайт</a>
+    <div class="flex items-center gap-3 sm:gap-4">
+      <a href="index.html" class="text-sm text-slate-400 hover:text-white transition-colors hidden sm:inline">На сайт</a>
       <button id="logout-btn" class="text-sm text-slate-400 hover:text-red-400 transition-colors flex items-center gap-1">
-        <span class="material-symbols-outlined text-lg">logout</span> Выйти
+        <span class="material-symbols-outlined text-lg">logout</span> <span class="hidden sm:inline">Выйти</span>
       </button>
     </div>
   </header>
 
-  <div class="flex flex-1 overflow-hidden">
+  <div class="flex flex-1 overflow-hidden relative">
+    <!-- Sidebar overlay (mobile) -->
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-30 lg:hidden"></div>
+
     <!-- Sidebar Tabs -->
-    <nav id="admin-nav" class="w-56 bg-surface-dark border-r border-white/10 py-6 flex flex-col gap-1 px-3 shrink-0 overflow-y-auto">
+    <nav id="admin-nav" class="fixed inset-y-0 left-0 z-40 w-64 bg-surface-dark border-r border-white/10 pt-20 pb-6 flex flex-col gap-1 px-3 overflow-y-auto transform -translate-x-full transition-transform duration-200 ease-out lg:static lg:w-56 lg:translate-x-0 lg:pt-6 lg:z-auto shrink-0">
       <button data-tab="bookings" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
         <span class="material-symbols-outlined text-xl">calendar_month</span> Записи
       </button>
@@ -85,10 +91,15 @@ body { font-family: "Work Sans", sans-serif; }
       <button data-tab="settings" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
         <span class="material-symbols-outlined text-xl">settings</span> Настройки
       </button>
+      <div class="mt-auto pt-4 border-t border-white/5 lg:hidden">
+        <a href="index.html" class="flex items-center gap-3 px-4 py-3 text-sm text-slate-400 hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-xl">home</span> На сайт
+        </a>
+      </div>
     </nav>
 
     <!-- Content Area -->
-    <main id="admin-content" class="flex-1 overflow-y-auto p-6 lg:p-8">
+    <main id="admin-content" class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
       <!-- Dynamic content -->
     </main>
   </div>

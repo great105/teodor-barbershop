@@ -1,3 +1,9 @@
 node_modules/
 server/db/teodor.db
 .env
+server/db/teodor.db-shm
+server/db/teodor.db-wal
+.playwright-mcp/
+*.zip
+extracted/
+admin-*.png

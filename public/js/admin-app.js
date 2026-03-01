@@ -2,7 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginScreen = document.getElementById('login-screen');
   const adminPanel = document.getElementById('admin-panel');
   const content = document.getElementById('admin-content');
+  const sidebar = document.getElementById('admin-nav');
+  const sidebarOverlay = document.getElementById('sidebar-overlay');
   let currentTab = 'bookings';
+
+  // ==================== MOBILE SIDEBAR ====================
+  function openSidebar() {
+    sidebar.classList.remove('-translate-x-full');
+    sidebar.classList.add('translate-x-0');
+    sidebarOverlay.classList.remove('hidden');
+  }
+  function closeSidebar() {
+    sidebar.classList.add('-translate-x-full');
+    sidebar.classList.remove('translate-x-0');
+    sidebarOverlay.classList.add('hidden');
+  }
+  document.getElementById('sidebar-toggle').addEventListener('click', openSidebar);
+  sidebarOverlay.addEventListener('click', closeSidebar);
 
   // ==================== AUTH ====================
   checkAuth();
@@ -49,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = e.target.closest('.admin-tab');
     if (!btn) return;
     switchTab(btn.dataset.tab);
+    closeSidebar();
   });
 
   function switchTab(tab) {
@@ -80,24 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const statusColors = { new: 'bg-blue-500/10 text-blue-400', confirmed: 'bg-green-500/10 text-green-400', completed: 'bg-slate-500/10 text-slate-400', cancelled: 'bg-red-500/10 text-red-400' };
 
       content.innerHTML = `
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold">Записи</h2>
-          <span class="text-sm text-slate-400">${bookings.length} записей</span>
+        <div class="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 class="text-xl sm:text-2xl font-bold">Записи</h2>
+          <span class="text-xs sm:text-sm text-slate-400">${bookings.length} записей</span>
         </div>
         ${bookings.length === 0 ? '<p class="text-slate-500 text-center py-12">Записей пока нет</p>' : `
-          <div class="space-y-4">
+          <div class="space-y-3 sm:space-y-4">
             ${bookings.map(b => `
-              <div class="bg-surface-dark rounded-xl p-5 border border-white/5">
-                <div class="flex flex-wrap items-start justify-between gap-4 mb-3">
-                  <div>
-                    <p class="font-bold text-lg">${b.client_name}</p>
+              <div class="bg-surface-dark rounded-xl p-4 sm:p-5 border border-white/5">
+                <div class="flex flex-wrap items-start justify-between gap-2 sm:gap-4 mb-3">
+                  <div class="min-w-0">
+                    <p class="font-bold text-base sm:text-lg truncate">${b.client_name}</p>
                     <p class="text-sm text-slate-400">${b.client_phone}</p>
                   </div>
-                  <div class="flex items-center gap-2">
-                    <span class="px-3 py-1 rounded-full text-xs font-bold ${statusColors[b.status] || ''}">${statusLabels[b.status] || b.status}</span>
-                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs font-bold shrink-0 ${statusColors[b.status] || ''}">${statusLabels[b.status] || b.status}</span>
                 </div>
-                <div class="flex flex-wrap gap-4 text-sm text-slate-300 mb-3">
+                <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-300 mb-3">
                   <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">event</span>${b.booking_date}</span>
                   <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">schedule</span>${b.booking_time}</span>
                   <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">person</span>${b.master_name || 'Любой мастер'}</span>
@@ -105,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 ${b.services?.length ? `<p class="text-xs text-slate-500 mb-3">Услуги: ${b.services.map(s => s.name).join(', ')}</p>` : ''}
                 ${b.client_comment ? `<p class="text-xs text-slate-500 mb-3">Комментарий: ${b.client_comment}</p>` : ''}
-                <div class="flex gap-2 pt-3 border-t border-white/5">
-                  ${b.status === 'new' ? `<button onclick="adminAction('confirmBooking', ${b.id})" class="text-xs px-3 py-1 rounded bg-green-500/10 text-green-400 hover:bg-green-500/20">Подтвердить</button>` : ''}
-                  ${b.status === 'confirmed' ? `<button onclick="adminAction('completeBooking', ${b.id})" class="text-xs px-3 py-1 rounded bg-blue-500/10 text-blue-400 hover:bg-blue-500/20">Завершить</button>` : ''}
-                  ${b.status !== 'cancelled' ? `<button onclick="adminAction('cancelBooking', ${b.id})" class="text-xs px-3 py-1 rounded bg-red-500/10 text-red-400 hover:bg-red-500/20">Отменить</button>` : ''}
-                  <button onclick="adminAction('deleteBooking', ${b.id})" class="text-xs px-3 py-1 rounded bg-white/5 text-slate-400 hover:bg-white/10 ml-auto">Удалить</button>
+                <div class="flex flex-wrap gap-2 pt-3 border-t border-white/5">
+                  ${b.status === 'new' ? `<button onclick="adminAction('confirmBooking', ${b.id})" class="text-xs px-3 py-2 rounded bg-green-500/10 text-green-400 active:bg-green-500/30">Подтвердить</button>` : ''}
+                  ${b.status === 'confirmed' ? `<button onclick="adminAction('completeBooking', ${b.id})" class="text-xs px-3 py-2 rounded bg-blue-500/10 text-blue-400 active:bg-blue-500/30">Завершить</button>` : ''}
+                  ${b.status !== 'cancelled' ? `<button onclick="adminAction('cancelBooking', ${b.id})" class="text-xs px-3 py-2 rounded bg-red-500/10 text-red-400 active:bg-red-500/30">Отменить</button>` : ''}
+                  <button onclick="adminAction('deleteBooking', ${b.id})" class="text-xs px-3 py-2 rounded bg-white/5 text-slate-400 active:bg-white/10 ml-auto">Удалить</button>
                 </div>
               </div>
             `).join('')}
@@ -125,30 +140,32 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const { categories, services } = await TheodorAPI.get('/api/admin/services');
       content.innerHTML = `
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold">Услуги</h2>
-          <button onclick="adminAction('addService')" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors">
-            <span class="material-symbols-outlined text-lg">add</span> Добавить услугу
+        <div class="flex items-center justify-between mb-4 sm:mb-6 gap-3">
+          <h2 class="text-xl sm:text-2xl font-bold">Услуги</h2>
+          <button onclick="adminAction('addService')" class="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-primary text-white rounded-lg text-xs sm:text-sm font-bold active:bg-primary/80 transition-colors shrink-0">
+            <span class="material-symbols-outlined text-lg">add</span> <span class="hidden sm:inline">Добавить</span><span class="sm:hidden">Новая</span>
           </button>
         </div>
         ${categories.map(cat => `
-          <div class="mb-8">
-            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <div class="mb-6 sm:mb-8">
+            <h3 class="text-base sm:text-lg font-bold mb-3 sm:mb-4 flex items-center gap-2">
               <span class="material-symbols-outlined text-primary">${cat.icon}</span> ${cat.name}
             </h3>
             <div class="space-y-2">
               ${services.filter(s => s.category_id === cat.id).map(svc => `
-                <div class="flex items-center justify-between p-4 bg-surface-dark rounded-xl border border-white/5 gap-4">
-                  <div class="flex-1 min-w-0">
-                    <p class="font-bold text-sm ${svc.active ? '' : 'text-slate-500 line-through'}">${svc.name}</p>
-                    <p class="text-xs text-slate-500 truncate">${svc.description || ''}</p>
-                  </div>
-                  <div class="text-sm font-bold text-right whitespace-nowrap">
-                    ${formatAdminPrice(svc)}
-                  </div>
-                  <div class="flex gap-1">
-                    <button onclick='adminAction("editService", ${JSON.stringify(svc).replace(/'/g, "&#39;")})' class="p-2 hover:bg-white/10 rounded-lg transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
-                    <button onclick="adminAction('deleteService', ${svc.id})" class="p-2 hover:bg-red-500/10 rounded-lg transition-colors text-red-400"><span class="material-symbols-outlined text-lg">delete</span></button>
+                <div class="p-3 sm:p-4 bg-surface-dark rounded-xl border border-white/5">
+                  <div class="flex items-center justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                      <p class="font-bold text-sm ${svc.active ? '' : 'text-slate-500 line-through'} truncate">${svc.name}</p>
+                      <p class="text-xs text-slate-500 truncate hidden sm:block">${svc.description || ''}</p>
+                    </div>
+                    <div class="text-xs sm:text-sm font-bold text-right whitespace-nowrap text-primary">
+                      ${formatAdminPrice(svc)}
+                    </div>
+                    <div class="flex gap-0.5 shrink-0">
+                      <button onclick='adminAction("editService", ${JSON.stringify(svc).replace(/'/g, "&#39;")})' class="p-2 active:bg-white/10 rounded-lg transition-colors"><span class="material-symbols-outlined text-lg">edit</span></button>
+                      <button onclick="adminAction('deleteService', ${svc.id})" class="p-2 active:bg-red-500/10 rounded-lg transition-colors text-red-400"><span class="material-symbols-outlined text-lg">delete</span></button>
+                    </div>
                   </div>
                 </div>
               `).join('')}
@@ -174,24 +191,25 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const members = await TheodorAPI.get('/api/admin/team');
       content.innerHTML = `
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold">Мастера</h2>
-          <button onclick="adminAction('addTeamMember')" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors">
-            <span class="material-symbols-outlined text-lg">add</span> Добавить мастера
+        <div class="flex items-center justify-between mb-4 sm:mb-6 gap-3">
+          <h2 class="text-xl sm:text-2xl font-bold">Мастера</h2>
+          <button onclick="adminAction('addTeamMember')" class="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-primary text-white rounded-lg text-xs sm:text-sm font-bold active:bg-primary/80 transition-colors shrink-0">
+            <span class="material-symbols-outlined text-lg">add</span> <span class="hidden sm:inline">Добавить мастера</span><span class="sm:hidden">Новый</span>
           </button>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           ${members.map(m => `
-            <div class="bg-surface-dark rounded-xl p-4 border border-white/5 ${m.active ? '' : 'opacity-50'}">
-              <div class="aspect-[3/4] rounded-lg overflow-hidden mb-4 bg-white/5">
-                ${m.photo_url ? `<img src="${m.photo_url}" class="w-full h-full object-cover"/>` : '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-4xl text-slate-600">person</span></div>'}
+            <div class="bg-surface-dark rounded-xl p-3 sm:p-4 border border-white/5 ${m.active ? '' : 'opacity-50'}">
+              <div class="aspect-[3/4] rounded-lg overflow-hidden mb-3 sm:mb-4 bg-white/5">
+                ${m.photo_url ? `<img src="${m.photo_url}" class="w-full h-full object-cover" loading="lazy"/>` : '<div class="w-full h-full flex items-center justify-center"><span class="material-symbols-outlined text-4xl text-slate-600">person</span></div>'}
               </div>
-              <h3 class="font-bold text-lg">${m.name}</h3>
-              <p class="text-primary text-sm font-bold uppercase">${m.role_label}</p>
-              <p class="text-xs text-slate-500">Ключ: ${m.role_key}</p>
-              <div class="flex gap-2 mt-4 pt-4 border-t border-white/5">
-                <button onclick='adminAction("editTeamMember", ${JSON.stringify(m).replace(/'/g, "&#39;")})' class="flex-1 text-xs py-2 rounded bg-white/5 hover:bg-white/10 transition-colors">Редактировать</button>
-                <button onclick="adminAction('deleteTeamMember', ${m.id})" class="text-xs py-2 px-3 rounded bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors">Удалить</button>
+              <h3 class="font-bold text-sm sm:text-lg truncate">${m.name}</h3>
+              <p class="text-primary text-xs sm:text-sm font-bold uppercase">${m.role_label}</p>
+              <div class="flex gap-2 mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-white/5">
+                <button onclick='adminAction("editTeamMember", ${JSON.stringify(m).replace(/'/g, "&#39;")})' class="flex-1 text-xs py-2 rounded bg-white/5 active:bg-white/10 transition-colors">Изменить</button>
+                <button onclick="adminAction('deleteTeamMember', ${m.id})" class="text-xs py-2 px-2 sm:px-3 rounded bg-red-500/10 text-red-400 active:bg-red-500/20 transition-colors">
+                  <span class="material-symbols-outlined text-sm">delete</span>
+                </button>
               </div>
             </div>
           `).join('')}
@@ -207,22 +225,31 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const images = await TheodorAPI.get('/api/admin/gallery');
       content.innerHTML = `
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold">Галерея</h2>
-          <button onclick="adminAction('addGalleryImage')" class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors">
-            <span class="material-symbols-outlined text-lg">add</span> Добавить фото
+        <div class="flex items-center justify-between mb-4 sm:mb-6 gap-3">
+          <h2 class="text-xl sm:text-2xl font-bold">Галерея</h2>
+          <button onclick="adminAction('addGalleryImage')" class="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 bg-primary text-white rounded-lg text-xs sm:text-sm font-bold active:bg-primary/80 transition-colors shrink-0">
+            <span class="material-symbols-outlined text-lg">add</span> <span class="hidden sm:inline">Добавить фото</span><span class="sm:hidden">Фото</span>
           </button>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           ${images.map(img => `
-            <div class="group relative bg-surface-dark rounded-xl overflow-hidden border border-white/5">
-              <img src="${img.url}" class="w-full aspect-square object-cover"/>
-              <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2">
-                <p class="text-white text-sm font-bold">${img.title || ''}</p>
-                <p class="text-primary text-xs font-bold uppercase">${img.category}</p>
-                <div class="flex gap-2 mt-2">
-                  <button onclick='adminAction("editGalleryImage", ${JSON.stringify(img).replace(/'/g, "&#39;")})' class="p-2 bg-white/10 rounded-lg hover:bg-white/20"><span class="material-symbols-outlined text-sm">edit</span></button>
-                  <button onclick="adminAction('deleteGalleryImage', ${img.id})" class="p-2 bg-red-500/10 rounded-lg hover:bg-red-500/20 text-red-400"><span class="material-symbols-outlined text-sm">delete</span></button>
+            <div class="bg-surface-dark rounded-xl overflow-hidden border border-white/5">
+              <div class="relative group">
+                <img src="${img.url}" class="w-full aspect-square object-cover" loading="lazy"/>
+                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:flex flex-col items-center justify-center gap-2">
+                  <p class="text-white text-sm font-bold">${img.title || ''}</p>
+                  <p class="text-primary text-xs font-bold uppercase">${img.category}</p>
+                  <div class="flex gap-2 mt-2">
+                    <button onclick='adminAction("editGalleryImage", ${JSON.stringify(img).replace(/'/g, "&#39;")})' class="p-2 bg-white/10 rounded-lg hover:bg-white/20"><span class="material-symbols-outlined text-sm">edit</span></button>
+                    <button onclick="adminAction('deleteGalleryImage', ${img.id})" class="p-2 bg-red-500/10 rounded-lg hover:bg-red-500/20 text-red-400"><span class="material-symbols-outlined text-sm">delete</span></button>
+                  </div>
+                </div>
+              </div>
+              <div class="p-2 sm:hidden">
+                <p class="text-xs font-bold truncate">${img.title || img.category}</p>
+                <div class="flex gap-1 mt-1">
+                  <button onclick='adminAction("editGalleryImage", ${JSON.stringify(img).replace(/'/g, "&#39;")})' class="flex-1 text-xs py-1.5 rounded bg-white/5 active:bg-white/10 text-center">Изменить</button>
+                  <button onclick="adminAction('deleteGalleryImage', ${img.id})" class="p-1.5 rounded bg-red-500/10 text-red-400 active:bg-red-500/20"><span class="material-symbols-outlined text-sm">delete</span></button>
                 </div>
               </div>
             </div>
@@ -239,25 +266,25 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const messages = await TheodorAPI.get('/api/admin/messages');
       content.innerHTML = `
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-2xl font-bold">Сообщения</h2>
-          <span class="text-sm text-slate-400">${messages.length} сообщений</span>
+        <div class="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 class="text-xl sm:text-2xl font-bold">Сообщения</h2>
+          <span class="text-xs sm:text-sm text-slate-400">${messages.length} сообщений</span>
         </div>
         ${messages.length === 0 ? '<p class="text-slate-500 text-center py-12">Сообщений нет</p>' : `
           <div class="space-y-3">
             ${messages.map(m => `
-              <div class="bg-surface-dark rounded-xl p-5 border ${m.is_read ? 'border-white/5' : 'border-primary/30'}">
-                <div class="flex items-start justify-between gap-4 mb-2">
-                  <div>
-                    <p class="font-bold ${m.is_read ? 'text-slate-400' : 'text-white'}">${m.name}</p>
+              <div class="bg-surface-dark rounded-xl p-4 sm:p-5 border ${m.is_read ? 'border-white/5' : 'border-primary/30'}">
+                <div class="flex items-start justify-between gap-2 sm:gap-4 mb-2">
+                  <div class="min-w-0">
+                    <p class="font-bold truncate ${m.is_read ? 'text-slate-400' : 'text-white'}">${m.name}</p>
                     <p class="text-sm text-slate-500">${m.phone}</p>
                   </div>
-                  <span class="text-xs text-slate-500 whitespace-nowrap">${new Date(m.created_at).toLocaleString('ru-RU')}</span>
+                  <span class="text-xs text-slate-500 whitespace-nowrap shrink-0">${new Date(m.created_at).toLocaleDateString('ru-RU')}</span>
                 </div>
                 ${m.message ? `<p class="text-sm text-slate-300 mb-3">${m.message}</p>` : ''}
                 <div class="flex gap-2">
-                  ${!m.is_read ? `<button onclick="adminAction('readMessage', ${m.id})" class="text-xs px-3 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20">Прочитано</button>` : ''}
-                  <button onclick="adminAction('deleteMessage', ${m.id})" class="text-xs px-3 py-1 rounded bg-white/5 text-slate-400 hover:bg-white/10 ml-auto">Удалить</button>
+                  ${!m.is_read ? `<button onclick="adminAction('readMessage', ${m.id})" class="text-xs px-3 py-2 rounded bg-primary/10 text-primary active:bg-primary/20">Прочитано</button>` : ''}
+                  <button onclick="adminAction('deleteMessage', ${m.id})" class="text-xs px-3 py-2 rounded bg-white/5 text-slate-400 active:bg-white/10 ml-auto">Удалить</button>
                 </div>
               </div>
             `).join('')}
@@ -276,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         TheodorAPI.get('/api/admin/timeslots'),
       ]);
       content.innerHTML = `
-        <h2 class="text-2xl font-bold mb-6">Настройки</h2>
+        <h2 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Настройки</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="bg-surface-dark rounded-xl p-6 border border-white/5">
             <h3 class="font-bold text-lg mb-4">Контактная информация</h3>
@@ -389,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showToast(msg, isError) {
     const toast = document.createElement('div');
-    toast.className = `fixed bottom-6 right-6 z-50 px-6 py-3 rounded-xl font-bold text-sm shadow-xl ${isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`;
+    toast.className = `fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:bottom-6 z-50 px-5 py-3 rounded-xl font-bold text-sm shadow-xl text-center sm:text-left ${isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`;
     toast.textContent = msg;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
