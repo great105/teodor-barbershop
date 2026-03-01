@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ==================== MOBILE SIDEBAR ====================
   function openSidebar() {
-    sidebar.classList.remove('-translate-x-full');
-    sidebar.classList.add('translate-x-0');
+    sidebar.classList.remove('-translate-x-full', 'pointer-events-none');
+    sidebar.classList.add('translate-x-0', 'pointer-events-auto');
     sidebarOverlay.classList.remove('hidden');
   }
   function closeSidebar() {
-    sidebar.classList.add('-translate-x-full');
-    sidebar.classList.remove('translate-x-0');
+    sidebar.classList.add('-translate-x-full', 'pointer-events-none');
+    sidebar.classList.remove('translate-x-0', 'pointer-events-auto');
     sidebarOverlay.classList.add('hidden');
   }
   document.getElementById('sidebar-toggle').addEventListener('click', openSidebar);
