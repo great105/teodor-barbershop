@@ -106,19 +106,11 @@ body { font-family: "Work Sans", sans-serif; }
 }
 .hero-logo {
     animation: float 6s ease-in-out infinite;
-    filter:
-        drop-shadow(0 0 1px rgba(212,175,55,0.8))
-        drop-shadow(0 0 1px rgba(212,175,55,0.6))
-        drop-shadow(0 0 1px rgba(212,175,55,0.4))
-        drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
     transition: filter 0.4s ease;
 }
 .hero-logo:hover {
-    filter:
-        drop-shadow(0 0 2px rgba(212,175,55,0.9))
-        drop-shadow(0 0 2px rgba(212,175,55,0.7))
-        drop-shadow(0 0 2px rgba(212,175,55,0.5))
-        drop-shadow(0 6px 12px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,0.6));
 }
 .logo-watermark {
     filter: sepia(1) hue-rotate(-10deg) brightness(0.35) saturate(2);
@@ -197,9 +189,9 @@ body { font-family: "Work Sans", sans-serif; }
 <div class="absolute inset-0 bg-black/70 z-10"></div>
 <div class="absolute inset-0 bg-cover bg-center scale-105" style="background-color: #211111; background-image: url('https://theodore-barbershop.com/95eb313923869e3db38a.png');"></div>
 <div class="relative z-20 text-center px-4 max-w-4xl">
-    <!-- Logo (transparent PNG, white drop-shadow for dark text visibility) -->
+    <!-- Logo (light SVG for dark backgrounds) -->
     <div class="relative inline-block mb-6">
-        <img src="Teodor.png" alt="Теодор" class="hero-logo relative h-44 md:h-64 mx-auto"/>
+        <img src="Teodor-light.svg" alt="Теодор" class="hero-logo relative h-44 md:h-64 mx-auto"/>
     </div>
     <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-3 block gold-glow">Barber &middot; Haircut &middot; Shaves &middot; Theodore</span>
     <h2 class="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
