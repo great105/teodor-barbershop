@@ -98,6 +98,27 @@ body { font-family: "Work Sans", sans-serif; }
     height: 1px;
     background: linear-gradient(90deg, transparent, #d4af37, transparent);
 }
+
+/* Hero logo organic integration */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+.hero-logo {
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(207,23,23,0.4)) drop-shadow(0 0 60px rgba(212,175,55,0.2));
+    transition: filter 0.4s ease;
+}
+.hero-logo:hover {
+    filter: drop-shadow(0 0 35px rgba(207,23,23,0.6)) drop-shadow(0 0 80px rgba(212,175,55,0.35));
+}
+.logo-glow {
+    background: radial-gradient(circle, rgba(207,23,23,0.12) 0%, rgba(212,175,55,0.06) 40%, transparent 70%);
+}
+.logo-watermark {
+    filter: sepia(1) hue-rotate(-10deg) brightness(0.35) saturate(2);
+    opacity: 0.1;
+}
 </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
@@ -168,18 +189,21 @@ body { font-family: "Work Sans", sans-serif; }
 <main class="flex-1">
 
 <!-- Hero -->
-<section class="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
-<div class="absolute inset-0 bg-black/60 z-10"></div>
+<section class="relative min-h-[90vh] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-black/70 z-10"></div>
 <div class="absolute inset-0 bg-cover bg-center scale-105" style="background-color: #211111; background-image: url('https://theodore-barbershop.com/95eb313923869e3db38a.png');"></div>
-<!-- Watermark cat -->
+<!-- Watermark cat (gold-tinted) -->
 <div class="absolute inset-0 z-[11] flex items-center justify-center pointer-events-none">
-    <img src="Teodor.png" alt="" class="w-[500px] md:w-[700px] opacity-[0.06]"/>
+    <img src="Teodor.png" alt="" class="logo-watermark w-[600px] md:w-[800px]"/>
 </div>
 <div class="relative z-20 text-center px-4 max-w-4xl">
-    <!-- Big cat logo -->
-    <img src="Teodor.png" alt="Теодор" class="h-32 md:h-48 mx-auto mb-6 drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)]"/>
-    <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-2 block gold-glow">Barber &middot; Haircut &middot; Shaves &middot; Theodore</span>
-    <h2 class="text-5xl md:text-8xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
+    <!-- Logo with radial glow backdrop -->
+    <div class="relative inline-block mb-6">
+        <div class="absolute -inset-16 logo-glow rounded-full blur-2xl pointer-events-none"></div>
+        <img src="Teodor.png" alt="Теодор" class="hero-logo relative h-44 md:h-64 mx-auto"/>
+    </div>
+    <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-3 block gold-glow">Barber &middot; Haircut &middot; Shaves &middot; Theodore</span>
+    <h2 class="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
         Искусство <br/>Современного Стиля
     </h2>
     <p class="text-slate-200 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
@@ -242,8 +266,8 @@ body { font-family: "Work Sans", sans-serif; }
             <img alt="Интерьер барбершопа Теодор" class="w-full h-full object-cover" loading="lazy" decoding="async" src="https://theodore-barbershop.com/aea07591843b11797a45.png"/>
         </div>
         <!-- Cat badge -->
-        <div class="absolute -bottom-6 -right-6 w-28 h-28 rounded-full border-4 border-accent-gold bg-background-dark flex items-center justify-center shadow-xl overflow-hidden">
-            <img src="Teodor.png" alt="Теодор" class="w-24 h-24 object-contain"/>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-accent-gold bg-background-dark flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.2)] overflow-hidden">
+            <img src="Teodor.png" alt="Теодор" class="w-28 h-28 object-contain drop-shadow-[0_0_10px_rgba(207,23,23,0.3)]"/>
         </div>
     </div>
     <div>
