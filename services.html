@@ -106,17 +106,17 @@ body { font-family: "Work Sans", sans-serif; }
 </div>
 </section>
 
-<!-- Price Legend -->
+<!-- Price Legend (clickable filters) -->
 <section class="mx-auto max-w-4xl px-4 sm:px-6 mb-8">
-    <div class="reveal flex flex-wrap items-center justify-center gap-6 p-4 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10">
-        <div class="flex items-center gap-2">
+    <div class="reveal flex flex-wrap items-center justify-center gap-4 p-4 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/10">
+        <button id="filter-top" class="barber-filter active flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-slate-600 bg-slate-600/10 transition-all cursor-pointer hover:bg-slate-600/20" data-filter="top">
             <span class="w-3 h-3 rounded-full bg-slate-600"></span>
-            <span class="text-sm font-medium text-slate-600 dark:text-slate-300">Топ-Барбер</span>
-        </div>
-        <div class="flex items-center gap-2">
+            <span class="text-sm font-bold text-slate-600 dark:text-slate-300">Топ-Барбер</span>
+        </button>
+        <button id="filter-brand" class="barber-filter active flex items-center gap-2 px-4 py-2 rounded-lg border-2 border-primary bg-primary/10 transition-all cursor-pointer hover:bg-primary/20" data-filter="brand">
             <span class="w-3 h-3 rounded-full bg-primary"></span>
-            <span class="text-sm font-medium text-primary">Бренд-Барбер</span>
-        </div>
+            <span class="text-sm font-bold text-primary">Бренд-Барбер</span>
+        </button>
     </div>
 </section>
 

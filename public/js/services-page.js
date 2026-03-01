@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     container.innerHTML = categories.map(cat => {
       const isPromo = cat.name === 'Акции';
       const iconColor = isPromo ? 'text-accent-gold' : 'text-primary';
-      const borderColor = isPromo ? 'border-accent-gold' : 'border-primary';
 
       return `
         <div class="reveal visible mb-12">
@@ -18,17 +17,81 @@ document.addEventListener('DOMContentLoaded', async () => {
             <h2 class="text-2xl font-bold text-slate-900 dark:text-white">${cat.name}</h2>
           </div>
           <div class="space-y-4">
-            ${cat.services.map(svc => renderService(svc, cat, isPromo, borderColor)).join('')}
+            ${cat.services.map(svc => renderService(svc, cat, isPromo)).join('')}
           </div>
         </div>`;
     }).join('');
+
+    // Setup filter buttons
+    setupFilters();
   } catch (e) {
     container.innerHTML = '<p class="text-center text-slate-400">Ошибка загрузки услуг</p>';
   }
 });
 
-function renderService(svc, cat, isPromo, borderColor) {
-  // Определяем стиль в зависимости от типа
+// Filter state
+let activeFilters = { top: true, brand: true };
+
+function setupFilters() {
+  const btnTop = document.getElementById('filter-top');
+  const btnBrand = document.getElementById('filter-brand');
+  if (!btnTop || !btnBrand) return;
+
+  btnTop.addEventListener('click', () => {
+    activeFilters.top = !activeFilters.top;
+    // If both would be off, turn both back on
+    if (!activeFilters.top && !activeFilters.brand) {
+      activeFilters.top = true;
+      activeFilters.brand = true;
+    }
+    applyFilters();
+  });
+
+  btnBrand.addEventListener('click', () => {
+    activeFilters.brand = !activeFilters.brand;
+    if (!activeFilters.top && !activeFilters.brand) {
+      activeFilters.top = true;
+      activeFilters.brand = true;
+    }
+    applyFilters();
+  });
+}
+
+function applyFilters() {
+  const btnTop = document.getElementById('filter-top');
+  const btnBrand = document.getElementById('filter-brand');
+
+  // Update button styles
+  if (activeFilters.top) {
+    btnTop.classList.add('active');
+    btnTop.classList.remove('opacity-40');
+    btnTop.style.borderColor = '';
+    btnTop.style.background = '';
+  } else {
+    btnTop.classList.remove('active');
+    btnTop.classList.add('opacity-40');
+  }
+
+  if (activeFilters.brand) {
+    btnBrand.classList.add('active');
+    btnBrand.classList.remove('opacity-40');
+  } else {
+    btnBrand.classList.remove('active');
+    btnBrand.classList.add('opacity-40');
+  }
+
+  // Update price visibility
+  document.querySelectorAll('.price-top').forEach(el => {
+    el.style.opacity = activeFilters.top ? '1' : '0.2';
+    el.style.transform = activeFilters.top ? 'scale(1)' : 'scale(0.9)';
+  });
+  document.querySelectorAll('.price-brand').forEach(el => {
+    el.style.opacity = activeFilters.brand ? '1' : '0.2';
+    el.style.transform = activeFilters.brand ? 'scale(1)' : 'scale(0.9)';
+  });
+}
+
+function renderService(svc, cat, isPromo) {
   if (isPromo) {
     return `
       <div class="group relative flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-5 rounded-xl bg-gradient-to-r from-accent-gold/10 to-transparent border border-accent-gold/30 hover:border-accent-gold transition-all duration-300 shadow-sm">
@@ -55,7 +118,6 @@ function renderService(svc, cat, isPromo, borderColor) {
       </div>`;
   }
 
-  // split / flat / range
   const priceHtml = renderPriceBlock(svc);
   return `
     <div class="group relative flex flex-col sm:flex-row sm:items-end justify-between gap-2 p-5 rounded-xl bg-white dark:bg-surface-dark border border-slate-200 dark:border-white/5 hover:border-primary/50 transition-all duration-300 shadow-sm">
@@ -71,12 +133,12 @@ function renderPriceBlock(svc) {
   if (svc.price_type === 'split') {
     return `
       <div class="flex items-center gap-4 min-w-[220px] justify-end">
-        <div class="flex flex-col items-center">
+        <div class="price-top flex flex-col items-center transition-all duration-300">
           <span class="text-base font-bold text-slate-600 dark:text-slate-300">${(svc.price_top || 0).toLocaleString('ru-RU')} \u20BD</span>
           <span class="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Топ-Барбер</span>
         </div>
         <span class="text-slate-300 dark:text-slate-600">/</span>
-        <div class="flex flex-col items-center">
+        <div class="price-brand flex flex-col items-center transition-all duration-300">
           <span class="text-base font-bold text-primary">${(svc.price_brand || 0).toLocaleString('ru-RU')} \u20BD</span>
           <span class="text-[10px] uppercase tracking-wider text-primary/70 font-medium">Бренд-Барбер</span>
         </div>
