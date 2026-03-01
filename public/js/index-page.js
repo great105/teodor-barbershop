@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const highlights = [];
       for (const cat of categories) {
         for (const svc of cat.services) {
-          if (svc.name === 'Мужская стрижка') highlights[0] = { svc, icon: 'content_cut', features: ['Консультация', 'Мытье головы', 'Укладка'] };
-          if (svc.name === 'Моделирование GH (простое)') highlights[1] = { svc, icon: 'face_6', features: ['Придание формы', 'Окантовка', 'Уход маслом'] };
-          if (svc.name === 'Стрижка + борода и усы') highlights[2] = { svc, icon: 'workspace_premium', features: ['Стрижка', 'Борода и усы', 'Комплексная цена'] };
+          if (svc.name === 'Мужская стрижка') highlights[0] = { svc, iconImg: 'public/icons/icon-scissors.png', features: ['Консультация', 'Мытье головы', 'Укладка'] };
+          if (svc.name === 'Моделирование GH (простое)') highlights[1] = { svc, iconImg: 'public/icons/icon-beard.png', features: ['Придание формы', 'Окантовка', 'Уход маслом'] };
+          if (svc.name === 'Стрижка + борода и усы') highlights[2] = { svc, iconImg: 'public/icons/icon-combo.png', features: ['Стрижка', 'Борода и усы', 'Комплексная цена'] };
         }
       }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return `
           <div class="group flex flex-col bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-8 rounded-xl transition-all hover:border-primary/50">
             <div class="flex justify-between items-start mb-6">
-              <span class="material-symbols-outlined text-4xl text-primary">${h.icon}</span>
+              <img src="${h.iconImg}" alt="" class="w-14 h-14 rounded-lg object-cover" loading="lazy"/>
               <span class="text-3xl font-black text-slate-900 dark:text-white">${priceLabel}</span>
             </div>
             <h4 class="text-xl font-bold mb-4 uppercase tracking-tight text-slate-900 dark:text-white">${h.svc.name}</h4>
