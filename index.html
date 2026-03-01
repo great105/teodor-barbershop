@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Барбершоп Теодор - Мужская территория</title>
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://theodore-barbershop.com">
+<link rel="preload" as="image" href="https://theodore-barbershop.com/95eb313923869e3db38a.png">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#cf1717",
+                "background-light": "#f8f6f6",
+                "background-dark": "#211111",
+                "surface-dark": "#2a1d1d",
+                "accent-gold": "#d4af37",
+            },
+            fontFamily: {
+                "display": ["Work Sans", "sans-serif"],
+                "accent": ["Caveat", "cursive"]
+            },
+            borderRadius: {
+                DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"
+            },
+        },
+    },
+}
+</script>
+<style>
+html:not(.loaded) { opacity: 0; }
+html.loaded { opacity: 1; transition: opacity 0.3s ease; }
+html { scroll-behavior: smooth; }
+body { font-family: "Work Sans", sans-serif; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Marquee */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.marquee-track {
+    display: flex;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* Barber-pole divider */
+@keyframes barber-pole {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 0; }
+}
+.barber-divider {
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        #cf1717 0px, #cf1717 15px,
+        #d4af37 15px, #d4af37 30px,
+        #211111 30px, #211111 45px,
+        #d4af37 45px, #d4af37 60px
+    );
+    background-size: 60px 4px;
+    animation: barber-pole 2s linear infinite;
+}
+
+/* Gold glow */
+.gold-glow {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.15);
+}
+
+/* Section accent */
+.section-accent {
+    font-family: "Caveat", cursive;
+    color: #d4af37;
+}
+
+/* Scissors divider */
+.scissors-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+}
+.scissors-divider .line {
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #d4af37, transparent);
+}
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-white/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+        <img src="Teodor.svg" alt="Теодор" class="h-10 md:h-12"/>
+        <span class="text-xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100">Теодор</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm font-bold text-primary" href="index.html">Главная</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="services.html">Услуги</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="team.html">Мастера</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="gallery.html">Галерея</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="contacts.html">Контакты</a>
+    </nav>
+    <div class="flex items-center gap-4">
+        <a href="booking.html" class="hidden sm:flex bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold text-sm transition-all uppercase tracking-wider">
+            Записаться
+        </a>
+        <button id="mobile-menu-btn" class="md:hidden text-slate-900 dark:text-white">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+    </div>
+</div>
+<div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-slate-200 dark:border-white/10">
+    <nav class="flex flex-col gap-4 pt-4">
+        <a class="text-sm font-bold text-primary" href="index.html">Главная</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="services.html">Услуги</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="team.html">Мастера</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="gallery.html">Галерея</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="contacts.html">Контакты</a>
+        <a href="booking.html" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold text-sm transition-all uppercase tracking-wider text-center">Записаться</a>
+    </nav>
+</div>
+</header>
+
+<!-- Barber-pole stripe after header -->
+<div class="barber-divider"></div>
+
+<!-- Marquee -->
+<div class="bg-black overflow-hidden whitespace-nowrap py-2.5">
+    <div class="marquee-track">
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&#9733; Привет, друг!</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; Новый прайс</span>
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; @THEODORE_BARBERSHOP</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; УЛ. БАКУНИНСКАЯ 72С.2</span>
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; 10:00&ndash;22:00</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; ТЕЛ: 8 (968) 997-66-77</span>
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; BARBER / HAIRCUT / SHAVES</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; THEODOR</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&#9733; Привет, друг!</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; Новый прайс</span>
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; @THEODORE_BARBERSHOP</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; УЛ. БАКУНИНСКАЯ 72С.2</span>
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; 10:00&ndash;22:00</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; ТЕЛ: 8 (968) 997-66-77</span>
+        <span class="text-white text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; BARBER / HAIRCUT / SHAVES</span>
+        <span class="text-accent-gold text-xs font-bold uppercase tracking-[0.2em] px-6">&bull; THEODOR</span>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="flex-1">
+
+<!-- Hero -->
+<section class="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 bg-black/60 z-10"></div>
+<div class="absolute inset-0 bg-cover bg-center scale-105" style="background-color: #211111; background-image: url('https://theodore-barbershop.com/95eb313923869e3db38a.png');"></div>
+<!-- Watermark cat -->
+<div class="absolute inset-0 z-[11] flex items-center justify-center pointer-events-none">
+    <img src="Teodor.svg" alt="" class="w-[500px] md:w-[700px] opacity-[0.04] brightness-0 invert"/>
+</div>
+<div class="relative z-20 text-center px-4 max-w-4xl">
+    <!-- Big cat logo -->
+    <img src="Teodor.svg" alt="Теодор" class="h-28 md:h-40 mx-auto mb-6 drop-shadow-[0_4px_24px_rgba(212,175,55,0.4)]"/>
+    <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-2 block gold-glow">Barber &middot; Haircut &middot; Shaves &middot; Theodore</span>
+    <h2 class="text-5xl md:text-8xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
+        Искусство <br/>Современного Стиля
+    </h2>
+    <p class="text-slate-200 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+        Привет, это Теодор! Дружище, ты зашёл по адресу &mdash; лучший сервис, профессиональные барберы и доступные цены ждут тебя.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="booking.html" class="w-full sm:w-auto bg-primary text-white px-10 py-4 rounded font-black uppercase tracking-widest hover:translate-y-[-2px] transition-all inline-block text-center">
+            Записаться на стрижку
+        </a>
+        <a href="services.html" class="w-full sm:w-auto border border-white/30 text-white px-10 py-4 rounded font-black uppercase tracking-widest hover:bg-white/10 transition-all inline-block text-center">
+            Посмотреть услуги
+        </a>
+    </div>
+</div>
+</section>
+
+<!-- Services Preview -->
+<section class="py-24 px-6 bg-background-light dark:bg-background-dark" id="services">
+<div class="max-w-7xl mx-auto">
+    <div class="reveal flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div class="max-w-2xl">
+            <span class="section-accent text-3xl md:text-4xl block mb-2">Наше Меню</span>
+            <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white uppercase leading-tight">Профессиональный Уход</h2>
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 max-w-sm">
+            Каждая услуга включает бесплатный напиток на ваш выбор и консультацию с нашими специалистами.
+        </p>
+    </div>
+    <div id="services-preview" class="reveal grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Динамически загружается из API -->
+    </div>
+</div>
+</section>
+
+<!-- Photo divider after services -->
+<div class="relative h-64 w-full overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('https://theodore-barbershop.com/dd4bfc563a0e07c85969.png');"></div>
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 flex items-center justify-center h-full">
+        <p class="font-accent text-3xl md:text-5xl text-white text-center gold-glow">Дружище, заходи к нам в гости!</p>
+    </div>
+</div>
+
+<!-- Scissors divider -->
+<div class="scissors-divider">
+    <span class="line"></span>
+    <svg class="w-8 h-8 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+        <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
+        <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+    </svg>
+    <span class="line"></span>
+</div>
+
+<!-- About -->
+<section class="py-24 px-6 border-y border-slate-200 dark:border-white/5" id="story">
+<div class="reveal max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div class="relative">
+        <div class="aspect-[4/5] rounded-xl overflow-hidden bg-slate-200">
+            <img alt="Интерьер барбершопа Теодор" class="w-full h-full object-cover" loading="lazy" decoding="async" src="https://theodore-barbershop.com/aea07591843b11797a45.png"/>
+        </div>
+        <!-- Cat badge -->
+        <div class="absolute -bottom-6 -right-6 w-24 h-24 rounded-full border-4 border-accent-gold bg-background-dark flex items-center justify-center shadow-xl">
+            <img src="Teodor.svg" alt="Теодор" class="w-16 h-16"/>
+        </div>
+    </div>
+    <div>
+        <span class="section-accent text-3xl md:text-4xl block mb-2">О Нас</span>
+        <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white uppercase mb-8 leading-tight">Теодор — Мужская территория</h2>
+        <div class="space-y-6 text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p>Барбершоп «Теодор» — это место, где мужской стиль обретает форму. Мы создали пространство, в котором каждый клиент получает первоклассный сервис, профессиональный подход и внимание к деталям.</p>
+            <p>Наши мастера владеют как классическими техниками, так и современными трендами. Мы работаем ежедневно с 10:00 до 22:00 и ждём вас по адресу: Ул. Бакунинская 72С.2, Москва.</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Scissors divider -->
+<div class="scissors-divider">
+    <span class="line"></span>
+    <svg class="w-8 h-8 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+        <line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/>
+        <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+    </svg>
+    <span class="line"></span>
+</div>
+
+<!-- Gallery Preview -->
+<section class="py-24 px-6 bg-slate-50 dark:bg-background-dark/50" id="gallery">
+<div class="max-w-7xl mx-auto">
+    <div class="reveal text-center mb-16">
+        <span class="section-accent text-3xl md:text-4xl block mb-2">Интерьер</span>
+        <h2 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-white uppercase mb-4 tracking-tight">Наша Атмосфера</h2>
+        <p class="text-slate-500 dark:text-slate-400">Зайдите в нашу атмосферу, созданную для вашего комфорта.</p>
+    </div>
+    <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4 md:h-[600px]">
+        <div class="col-span-2 row-span-2 overflow-hidden rounded-xl">
+            <img alt="Интерьер барбершопа" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 transform-gpu" loading="lazy" decoding="async" src="https://theodore-barbershop.com/95eb313923869e3db38a.png"/>
+        </div>
+        <div class="overflow-hidden rounded-xl">
+            <img alt="Бритва" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 transform-gpu" loading="lazy" decoding="async" src="https://theodore-barbershop.com/dd4bfc563a0e07c85969.png"/>
+        </div>
+        <div class="overflow-hidden rounded-xl">
+            <img alt="Интерьер зала" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 transform-gpu" loading="lazy" decoding="async" src="https://theodore-barbershop.com/aea07591843b11797a45.png"/>
+        </div>
+        <div class="col-span-2 overflow-hidden rounded-xl">
+            <img alt="Рабочее место" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500 transform-gpu" loading="lazy" decoding="async" src="https://theodore-barbershop.com/becbf4332510f9e6c305.png"/>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Photo divider after gallery -->
+<div class="relative h-48 w-full overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('https://theodore-barbershop.com/becbf4332510f9e6c305.png');"></div>
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 flex items-center justify-center h-full">
+        <p class="font-accent text-2xl md:text-4xl text-accent-gold text-center gold-glow">Barber &middot; Haircut &middot; Shaves</p>
+    </div>
+</div>
+
+<!-- CTA -->
+<section class="py-20 px-6 bg-primary text-white text-center">
+<div class="reveal max-w-3xl mx-auto">
+    <span class="section-accent text-3xl md:text-4xl block mb-2 !text-white/80">Эй, дружище!</span>
+    <h2 class="text-4xl md:text-5xl font-black uppercase mb-6">Готовы к лучшему образу?</h2>
+    <p class="text-white/80 text-lg mb-4">Свободное время быстро заканчивается. Забронируйте сеанс у наших мастеров сегодня.</p>
+    <p class="text-white/80 text-lg mb-10">Звоните: <a href="tel:89689976677" class="text-white font-bold hover:underline">8 (968) 997-66-77</a></p>
+    <a href="booking.html" class="inline-block bg-white text-primary px-12 py-5 rounded font-black uppercase tracking-widest hover:bg-slate-100 transition-colors text-lg shadow-xl">
+        Занять кресло
+    </a>
+</div>
+</section>
+
+</main>
+
+<!-- Barber-pole stripe before footer -->
+<div class="barber-divider"></div>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-white py-20 px-6">
+<div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="col-span-1">
+            <div class="flex items-center gap-3 mb-6">
+                <img src="Teodor.svg" alt="Теодор" class="h-12 brightness-0 invert"/>
+                <h2 class="text-xl font-black uppercase tracking-widest">Теодор</h2>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-8">
+                Привет, дружище! Мы — барбершоп Теодор. Лучший сервис, профессиональные барберы, доступные цены. Заходи!
+            </p>
+            <div class="flex gap-4">
+                <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="https://vk.com/theodore_barbershop" target="_blank">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.847 2.45 2.27 4.597 2.854 4.597.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.253-1.406 2.146-3.574 2.146-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg>
+                </a>
+            </div>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Адрес</h4>
+            <address class="not-italic text-slate-400 text-sm space-y-2">
+                <p>Ул. Бакунинская 72С.2</p>
+                <p>Москва</p>
+                <p class="pt-4 text-white font-medium">8 (968) 997-66-77</p>
+                <p class="text-white font-medium">Theodore-Barbershop@yandex.ru</p>
+            </address>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Часы работы</h4>
+            <ul class="text-slate-400 text-sm space-y-2">
+                <li class="flex justify-between"><span>Ежедневно</span> <span>10:00 — 22:00</span></li>
+            </ul>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Рассылка</h4>
+            <p class="text-slate-400 text-xs mb-4">Подпишитесь для получения эксклюзивных советов и приглашений.</p>
+            <form class="flex">
+                <input class="bg-white/5 border-none focus:ring-primary rounded-l text-sm w-full" placeholder="Ваш Email" type="email"/>
+                <button class="bg-primary px-4 rounded-r" type="submit">
+                    <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-slate-500 text-xs uppercase tracking-widest">&copy; 2024 Барбершоп Теодор. Все права защищены.</p>
+        <div class="flex gap-8 text-slate-500 text-xs uppercase tracking-widest">
+            <a class="hover:text-white transition-colors" href="#">Политика конфиденциальности</a>
+            <a class="hover:text-white transition-colors" href="#">Условия использования</a>
+        </div>
+    </div>
+</div>
+</footer>
+
+</div>
+
+<script>
+document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+document.documentElement.classList.add('loaded');
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+<script src="public/js/api.js"></script>
+<script src="public/js/index-page.js"></script>
+</body>
+</html>

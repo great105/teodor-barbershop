@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Админ-панель - Барбершоп Теодор</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#cf1717",
+                "background-light": "#f8f6f6",
+                "background-dark": "#211111",
+                "surface-dark": "#2a1d1d",
+                "accent-gold": "#d4af37",
+            },
+            fontFamily: {
+                "display": ["Work Sans", "sans-serif"]
+            },
+        },
+    },
+}
+</script>
+<style>
+body { font-family: "Work Sans", sans-serif; }
+</style>
+</head>
+<body class="bg-background-dark text-slate-100 antialiased min-h-screen flex flex-col">
+
+<!-- Login Screen -->
+<div id="login-screen" class="flex-1 flex items-center justify-center px-4">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <img src="Teodor.svg" alt="Теодор" class="h-10 mx-auto mb-4 brightness-0 invert"/>
+      <h1 class="text-2xl font-black uppercase tracking-widest mb-2">Админ-панель</h1>
+      <p class="text-slate-400 text-sm">Введите пароль для входа</p>
+    </div>
+    <form id="login-form" class="space-y-4">
+      <input id="login-password" type="password" placeholder="Пароль" class="w-full bg-surface-dark border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"/>
+      <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary/90 transition-colors">Войти</button>
+      <p id="login-error" class="text-red-400 text-sm text-center hidden"></p>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Panel (hidden until login) -->
+<div id="admin-panel" class="hidden flex-1 flex flex-col">
+  <!-- Top Bar -->
+  <header class="bg-surface-dark border-b border-white/10 px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img src="Teodor.svg" alt="Теодор" class="h-6 brightness-0 invert"/>
+      <span class="text-lg font-bold uppercase tracking-wider">Админ</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="text-sm text-slate-400 hover:text-white transition-colors">На сайт</a>
+      <button id="logout-btn" class="text-sm text-slate-400 hover:text-red-400 transition-colors flex items-center gap-1">
+        <span class="material-symbols-outlined text-lg">logout</span> Выйти
+      </button>
+    </div>
+  </header>
+
+  <div class="flex flex-1 overflow-hidden">
+    <!-- Sidebar Tabs -->
+    <nav id="admin-nav" class="w-56 bg-surface-dark border-r border-white/10 py-6 flex flex-col gap-1 px-3 shrink-0 overflow-y-auto">
+      <button data-tab="bookings" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
+        <span class="material-symbols-outlined text-xl">calendar_month</span> Записи
+      </button>
+      <button data-tab="services" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
+        <span class="material-symbols-outlined text-xl">content_cut</span> Услуги
+      </button>
+      <button data-tab="team" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
+        <span class="material-symbols-outlined text-xl">group</span> Мастера
+      </button>
+      <button data-tab="gallery" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
+        <span class="material-symbols-outlined text-xl">photo_library</span> Галерея
+      </button>
+      <button data-tab="messages" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
+        <span class="material-symbols-outlined text-xl">mail</span> Сообщения
+      </button>
+      <button data-tab="settings" class="admin-tab flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors text-left">
+        <span class="material-symbols-outlined text-xl">settings</span> Настройки
+      </button>
+    </nav>
+
+    <!-- Content Area -->
+    <main id="admin-content" class="flex-1 overflow-y-auto p-6 lg:p-8">
+      <!-- Dynamic content -->
+    </main>
+  </div>
+</div>
+
+<script src="public/js/api.js"></script>
+<script src="public/js/admin-app.js"></script>
+</body>
+</html>

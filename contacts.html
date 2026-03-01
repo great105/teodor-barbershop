@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Контакты - Барбершоп Теодор</title>
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://theodore-barbershop.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#cf1717",
+                "background-light": "#f8f6f6",
+                "background-dark": "#211111",
+                "surface-dark": "#2a1d1d",
+                "accent-gold": "#d4af37",
+            },
+            fontFamily: {
+                "display": ["Work Sans", "sans-serif"],
+                "accent": ["Caveat", "cursive"]
+            },
+            borderRadius: {
+                DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"
+            },
+        },
+    },
+}
+</script>
+<style>
+html:not(.loaded) { opacity: 0; }
+html.loaded { opacity: 1; transition: opacity 0.3s ease; }
+html { scroll-behavior: smooth; }
+body { font-family: "Work Sans", sans-serif; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes barber-pole {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 0; }
+}
+.barber-divider {
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #cf1717 0px, #cf1717 15px, #d4af37 15px, #d4af37 30px, #211111 30px, #211111 45px, #d4af37 45px, #d4af37 60px);
+    background-size: 60px 4px;
+    animation: barber-pole 2s linear infinite;
+}
+.gold-glow { text-shadow: 0 0 20px rgba(212,175,55,0.3), 0 0 40px rgba(212,175,55,0.15); }
+.section-accent { font-family: "Caveat", cursive; color: #d4af37; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden antialiased">
+
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-white/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+        <img src="Teodor.svg" alt="Теодор" class="h-10 md:h-12"/>
+        <span class="text-xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100">Теодор</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Главная</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="services.html">Услуги</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="team.html">Мастера</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="gallery.html">Галерея</a>
+        <a class="text-sm font-bold text-primary" href="contacts.html">Контакты</a>
+    </nav>
+    <div class="flex items-center gap-4">
+        <a href="booking.html" class="hidden sm:flex bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold text-sm transition-all uppercase tracking-wider">Записаться</a>
+        <button id="mobile-menu-btn" class="md:hidden text-slate-900 dark:text-white">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+    </div>
+</div>
+<div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-slate-200 dark:border-white/10">
+    <nav class="flex flex-col gap-4 pt-4">
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Главная</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="services.html">Услуги</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="team.html">Мастера</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="gallery.html">Галерея</a>
+        <a class="text-sm font-bold text-primary" href="contacts.html">Контакты</a>
+        <a href="booking.html" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold text-sm transition-all uppercase tracking-wider text-center">Записаться</a>
+    </nav>
+</div>
+</header>
+
+<!-- Barber-pole stripe after header -->
+<div class="barber-divider"></div>
+
+<main class="flex-1 flex flex-col items-center">
+<div class="w-full max-w-[1280px] px-6 lg:px-20 py-10 lg:py-16">
+
+<!-- Page Title -->
+<div class="flex flex-col gap-4 mb-12">
+    <span class="section-accent text-3xl md:text-4xl">Где нас найти</span>
+    <h1 class="text-slate-900 dark:text-white text-4xl lg:text-6xl font-black leading-tight tracking-tight">Контакты</h1>
+    <p class="text-slate-500 dark:text-slate-400 text-lg lg:text-xl font-normal leading-relaxed max-w-2xl">
+        Заходи в гости! Мы создали пространство, где стиль встречается с традициями. Ждем тебя ежедневно в центре Москвы.
+    </p>
+</div>
+
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+    <!-- Info Column -->
+    <div class="reveal lg:col-span-5 flex flex-col gap-8 order-2 lg:order-1">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+            <!-- Address -->
+            <div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-white/10 flex items-start gap-4">
+                <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary">location_on</span>
+                </div>
+                <div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Наш адрес</p>
+                    <p class="text-slate-900 dark:text-white font-semibold text-lg">Ул. Бакунинская 72С.2,<br/>Москва</p>
+                    <a class="inline-flex items-center gap-1 text-primary text-sm font-bold mt-2 hover:underline" href="https://yandex.ru/maps/?rtext=~55.7736,37.6836&rtt=auto&z=16" target="_blank" rel="noopener">
+                        Проложить маршрут
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Phone & Email -->
+            <div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-white/10 flex items-start gap-4">
+                <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary">call</span>
+                </div>
+                <div class="flex flex-col gap-4 w-full">
+                    <div>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Телефон</p>
+                        <a class="text-slate-900 dark:text-white font-semibold text-lg hover:text-primary transition-colors" href="tel:89689976677">8 (968) 997-66-77</a>
+                    </div>
+                    <div class="border-t border-slate-100 dark:border-white/10 pt-4">
+                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Email</p>
+                        <a class="text-slate-900 dark:text-white font-medium hover:text-primary transition-colors" href="mailto:Theodore-Barbershop@yandex.ru">Theodore-Barbershop@yandex.ru</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Hours -->
+            <div class="bg-white dark:bg-surface-dark p-6 rounded-xl border border-slate-200 dark:border-white/10 flex items-start gap-4">
+                <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary">schedule</span>
+                </div>
+                <div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Режим работы</p>
+                    <p class="text-slate-900 dark:text-white font-semibold">Ежедневно</p>
+                    <p class="text-slate-900 dark:text-white text-lg">с 10:00 до 22:00</p>
+                </div>
+            </div>
+            <!-- Socials -->
+            <div class="flex gap-4 pt-2">
+                <a class="flex-1 bg-[#4C75A3] hover:bg-[#3b6291] transition-colors p-4 rounded-xl flex items-center justify-center gap-2 group" href="https://vk.com/theodore_barbershop" target="_blank">
+                    <span class="text-white font-bold">ВКонтакте</span>
+                    <span class="material-symbols-outlined text-white text-sm">open_in_new</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map & Form Column -->
+    <div class="reveal lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2">
+        <!-- Map -->
+        <div class="relative w-full h-[300px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-surface-dark">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=37.6836,55.7736&z=16&l=map&pt=37.6836,55.7736,pm2rdl1~37.6836,55.7736,pm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:absolute;inset:0;" loading="lazy"></iframe>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="bg-white dark:bg-surface-dark p-6 lg:p-8 rounded-2xl border border-slate-200 dark:border-white/10">
+            <h3 class="text-slate-900 dark:text-white text-2xl font-bold mb-2">Остались вопросы?</h3>
+            <p class="text-slate-500 dark:text-slate-400 mb-6">Заполните форму, и мы свяжемся с вами в ближайшее время.</p>
+            <form id="contact-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="name">Имя</label>
+                        <input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-white/10 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="name" placeholder="Иван Иванов" type="text"/>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="phone">Телефон</label>
+                        <input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-white/10 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" id="phone" placeholder="+7 (___) ___-__-__" type="tel"/>
+                    </div>
+                </div>
+                <div class="space-y-1">
+                    <label class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider" for="message">Сообщение</label>
+                    <textarea class="w-full bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-white/10 rounded-lg px-4 py-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none" id="message" placeholder="Ваш вопрос или комментарий..." rows="3"></textarea>
+                </div>
+                <div class="pt-2">
+                    <button class="w-full bg-primary hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg transition-all transform hover:scale-[1.01] shadow-lg shadow-red-900/20 flex items-center justify-center gap-2" type="button">
+                        <span>Отправить сообщение</span>
+                        <span class="material-symbols-outlined text-sm">send</span>
+                    </button>
+                    <p class="text-center text-xs text-slate-400 dark:text-slate-500 mt-3">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+</main>
+
+<!-- Barber-pole stripe before footer -->
+<div class="barber-divider"></div>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-white py-20 px-6">
+<div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="col-span-1">
+            <div class="flex items-center gap-3 mb-6">
+                <img src="Teodor.svg" alt="Теодор" class="h-12 brightness-0 invert"/>
+                <h2 class="text-xl font-black uppercase tracking-widest">Теодор</h2>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-8">Привет, дружище! Мы — барбершоп Теодор. Лучший сервис, профессиональные барберы, доступные цены. Заходи!</p>
+            <div class="flex gap-4">
+                <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="https://vk.com/theodore_barbershop" target="_blank"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.847 2.45 2.27 4.597 2.854 4.597.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.253-1.406 2.146-3.574 2.146-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg></a>
+            </div>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Адрес</h4>
+            <address class="not-italic text-slate-400 text-sm space-y-2">
+                <p>Ул. Бакунинская 72С.2</p>
+                <p>Москва</p>
+                <p class="pt-4 text-white font-medium">8 (968) 997-66-77</p>
+                <p class="text-white font-medium">Theodore-Barbershop@yandex.ru</p>
+            </address>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Часы работы</h4>
+            <ul class="text-slate-400 text-sm space-y-2">
+                <li class="flex justify-between"><span>Ежедневно</span> <span>10:00 — 22:00</span></li>
+            </ul>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Рассылка</h4>
+            <p class="text-slate-400 text-xs mb-4">Подпишитесь для получения эксклюзивных советов и приглашений.</p>
+            <form class="flex">
+                <input class="bg-white/5 border-none focus:ring-primary rounded-l text-sm w-full" placeholder="Ваш Email" type="email"/>
+                <button class="bg-primary px-4 rounded-r" type="submit"><span class="material-symbols-outlined text-sm">send</span></button>
+            </form>
+        </div>
+    </div>
+    <div class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-slate-500 text-xs uppercase tracking-widest">&copy; 2024 Барбершоп Теодор. Все права защищены.</p>
+        <div class="flex gap-8 text-slate-500 text-xs uppercase tracking-widest">
+            <a class="hover:text-white transition-colors" href="#">Политика конфиденциальности</a>
+            <a class="hover:text-white transition-colors" href="#">Условия использования</a>
+        </div>
+    </div>
+</div>
+</footer>
+
+<script>
+document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+document.documentElement.classList.add('loaded');
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+<script src="public/js/api.js"></script>
+<script src="public/js/contacts-page.js"></script>
+</body>
+</html>

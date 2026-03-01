@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Запись - Барбершоп Теодор</title>
+<link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://theodore-barbershop.com">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&family=Caveat:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+    darkMode: "class",
+    theme: {
+        extend: {
+            colors: {
+                "primary": "#cf1717",
+                "background-light": "#f8f6f6",
+                "background-dark": "#211111",
+                "surface-dark": "#2a1d1d",
+                "accent-gold": "#d4af37",
+            },
+            fontFamily: {
+                "display": ["Work Sans", "sans-serif"],
+                "accent": ["Caveat", "cursive"]
+            },
+            borderRadius: {
+                DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", "2xl": "1rem", full: "9999px"
+            },
+        },
+    },
+}
+</script>
+<style>
+html:not(.loaded) { opacity: 0; }
+html.loaded { opacity: 1; transition: opacity 0.3s ease; }
+html { scroll-behavior: smooth; }
+body { font-family: "Work Sans", sans-serif; }
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes barber-pole {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 0; }
+}
+.barber-divider {
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #cf1717 0px, #cf1717 15px, #d4af37 15px, #d4af37 30px, #211111 30px, #211111 45px, #d4af37 45px, #d4af37 60px);
+    background-size: 60px 4px;
+    animation: barber-pole 2s linear infinite;
+}
+.gold-glow { text-shadow: 0 0 20px rgba(212,175,55,0.3), 0 0 40px rgba(212,175,55,0.15); }
+.section-accent { font-family: "Caveat", cursive; color: #d4af37; }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-white/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+        <img src="Teodor.svg" alt="Теодор" class="h-10 md:h-12"/>
+        <span class="text-xl font-black uppercase tracking-widest text-slate-900 dark:text-slate-100">Теодор</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Главная</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="services.html">Услуги</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="team.html">Мастера</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="gallery.html">Галерея</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="contacts.html">Контакты</a>
+    </nav>
+    <div class="flex items-center gap-4">
+        <a href="booking.html" class="hidden sm:flex bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold text-sm transition-all uppercase tracking-wider">Записаться</a>
+        <button id="mobile-menu-btn" class="md:hidden text-slate-900 dark:text-white">
+            <span class="material-symbols-outlined text-3xl">menu</span>
+        </button>
+    </div>
+</div>
+<div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-slate-200 dark:border-white/10">
+    <nav class="flex flex-col gap-4 pt-4">
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Главная</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="services.html">Услуги</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="team.html">Мастера</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="gallery.html">Галерея</a>
+        <a class="text-sm font-medium hover:text-primary transition-colors" href="contacts.html">Контакты</a>
+        <a href="booking.html" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold text-sm transition-all uppercase tracking-wider text-center">Записаться</a>
+    </nav>
+</div>
+</header>
+
+<!-- Barber-pole stripe after header -->
+<div class="barber-divider"></div>
+
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+<!-- Left Column: Sidebar (динамический) -->
+<div class="lg:col-span-4 flex flex-col gap-6 order-2 lg:order-1" id="booking-sidebar">
+</div>
+
+<!-- Right Column: Wizard (динамический) -->
+<div class="lg:col-span-8 order-1 lg:order-2">
+  <div class="mb-6">
+    <span class="section-accent text-3xl md:text-4xl block mb-1">Выбирай и записывайся</span>
+    <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-2 text-slate-900 dark:text-white">Онлайн-запись</h2>
+    <p class="text-slate-500 dark:text-slate-400 text-base">Выберите услуги, мастера и удобное время</p>
+  </div>
+  <div id="booking-wizard">
+    <p class="text-center text-slate-400 py-12">Загрузка...</p>
+  </div>
+</div>
+
+</div>
+</main>
+
+<!-- Barber-pole stripe before footer -->
+<div class="barber-divider"></div>
+
+<!-- Footer -->
+<footer class="bg-slate-900 text-white py-20 px-6 mt-auto">
+<div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div class="col-span-1">
+            <div class="flex items-center gap-3 mb-6">
+                <img src="Teodor.svg" alt="Теодор" class="h-12 brightness-0 invert"/>
+                <h2 class="text-xl font-black uppercase tracking-widest">Теодор</h2>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-8">Привет, дружище! Мы — барбершоп Теодор. Лучший сервис, профессиональные барберы, доступные цены. Заходи!</p>
+            <div class="flex gap-4">
+                <a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary transition-colors" href="https://vk.com/theodore_barbershop" target="_blank"><svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.847 2.45 2.27 4.597 2.854 4.597.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.253-1.406 2.146-3.574 2.146-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg></a>
+            </div>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Адрес</h4>
+            <address class="not-italic text-slate-400 text-sm space-y-2">
+                <p>Ул. Бакунинская 72С.2</p>
+                <p>Москва</p>
+                <p class="pt-4 text-white font-medium">8 (968) 997-66-77</p>
+                <p class="text-white font-medium">Theodore-Barbershop@yandex.ru</p>
+            </address>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Часы работы</h4>
+            <ul class="text-slate-400 text-sm space-y-2">
+                <li class="flex justify-between"><span>Ежедневно</span> <span>10:00 — 22:00</span></li>
+            </ul>
+        </div>
+        <div class="col-span-1">
+            <h4 class="font-bold uppercase tracking-widest text-sm mb-6 text-white">Рассылка</h4>
+            <p class="text-slate-400 text-xs mb-4">Подпишитесь для получения эксклюзивных советов и приглашений.</p>
+            <form class="flex">
+                <input class="bg-white/5 border-none focus:ring-primary rounded-l text-sm w-full" placeholder="Ваш Email" type="email"/>
+                <button class="bg-primary px-4 rounded-r" type="submit"><span class="material-symbols-outlined text-sm">send</span></button>
+            </form>
+        </div>
+    </div>
+    <div class="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-slate-500 text-xs uppercase tracking-widest">&copy; 2024 Барбершоп Теодор. Все права защищены.</p>
+        <div class="flex gap-8 text-slate-500 text-xs uppercase tracking-widest">
+            <a class="hover:text-white transition-colors" href="#">Политика конфиденциальности</a>
+            <a class="hover:text-white transition-colors" href="#">Условия использования</a>
+        </div>
+    </div>
+</div>
+</footer>
+
+<script>
+document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+document.documentElement.classList.add('loaded');
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+<script src="public/js/api.js"></script>
+<script src="public/js/booking-wizard.js"></script>
+</body>
+</html>
