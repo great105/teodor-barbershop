@@ -204,12 +204,19 @@ body { font-family: "Work Sans", sans-serif; }
 <div class="absolute inset-0 bg-cover bg-center scale-105" style="background-color: #211111; background-image: url('https://theodore-barbershop.com/95eb313923869e3db38a.png');"></div>
 <div class="relative z-20 text-center px-4 max-w-4xl">
     <!-- Logo -->
-    <div class="relative inline-block mb-6">
+    <div class="relative inline-block mb-6" id="cat-container">
         <div class="logo-glow"></div>
         <picture>
             <source srcset="Teodor-hero.webp" type="image/webp">
-            <img src="Teodor-hero.png" alt="Теодор" class="hero-logo relative z-10 h-52 md:h-80 mx-auto" fetchpriority="high"/>
+            <img src="Teodor-hero.png" alt="Теодор" class="hero-logo relative z-10 h-52 md:h-80 mx-auto cursor-pointer" fetchpriority="high" id="cat-logo"/>
         </picture>
+        <!-- Speech bubble -->
+        <div id="cat-bubble" class="absolute -top-2 -right-4 md:-top-4 md:-right-6 z-20 opacity-0 scale-75 pointer-events-none transition-all duration-300 origin-bottom-left" style="transform: scale(0.75) translateY(10px);">
+            <div class="relative bg-white text-background-dark font-accent text-xl md:text-2xl font-bold px-5 py-3 rounded-2xl shadow-xl whitespace-nowrap">
+                Мяу, Сэр!
+                <div class="absolute -bottom-2 left-6 w-4 h-4 bg-white rotate-45 rounded-sm"></div>
+            </div>
+        </div>
     </div>
     <span class="text-accent-gold uppercase tracking-[0.3em] font-semibold text-sm mb-3 block gold-glow">Стрижки &middot; Бритьё &middot; Борода &middot; Теодор</span>
     <h2 class="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
@@ -414,6 +421,22 @@ const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Easter egg: click the cat
+const catLogo = document.getElementById('cat-logo');
+const catBubble = document.getElementById('cat-bubble');
+if (catLogo && catBubble) {
+    let bubbleTimer = null;
+    catLogo.addEventListener('click', () => {
+        clearTimeout(bubbleTimer);
+        catBubble.style.opacity = '1';
+        catBubble.style.transform = 'scale(1) translateY(0)';
+        bubbleTimer = setTimeout(() => {
+            catBubble.style.opacity = '0';
+            catBubble.style.transform = 'scale(0.75) translateY(10px)';
+        }, 2000);
+    });
+}
 </script>
 <script src="public/js/api.js"></script>
 <script src="public/js/index-page.js"></script>
